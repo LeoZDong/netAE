@@ -61,7 +61,7 @@ Alternatively, one may call `train_netAE(all_data, labeled_data, labeled_lab, sa
 After training, one may want to use a classifier on the embedded space to test its classification accuracy. The `inference.py` script deals with comparing classification accuracy of netAE with other baseline models when using KNN and logistic regression, two simple classifiers. To start, make sure netAE, AE (the unsuperivsed counterpart), scVI, PCA, and ZIFA are trained and have their embedded spaces located in `MODEL_PATH`. Then simply pass in `--data-path`, `--model-path`, `--lab-size`, and `--dataset`. Additionally, to ensure that the labeled set used in training netAE is the same as here, make sure that you pass in the same seed `--seed` here as when training netAE.
 
 ## Data description
-We have provided the three datasets we used in our paper located in the data folder of this repository. Specifically, we have
+We describe the three datasets we used in our paper. Specifically, we have
 - Cortex dataset:
     - Zeisel, A. et al. (2015). Cell types in the mouse cortex and hippocampus revealed by single-cell rna-seq. Science, 347(6226), 1138–1142.
     - 3005 samples, 19972 genes, and 7 cell classes
@@ -72,6 +72,8 @@ We have provided the three datasets we used in our paper located in the data fol
     - Nestorowa, S. et al. (2016). A single-cell resolution map of mouse hematopoietic stem and progenitor cell differentiation. Blood, 128(8), e20–e31.
     - 1920 samples, 24557 genes, and 3 cell classes
 
+All datasets could be downloaded from the link provided in the original paper.
+
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
