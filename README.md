@@ -1,7 +1,7 @@
 
 # netAE: network-enhanced autoencoder
 
-Network-enhanced autoencoder (netAE) is a semi-supervised dimensionality reduction method. Created by Zhengyang (Leo) Dong.
+Network-enhanced autoencoder (netAE) is a semi-supervised dimensionality reduction method. It was specifically designed to facilitate cell labeling of single cell RNA-sequencing data. This repository was created by Zhengyang (Leo) Dong.
 
 ## Getting Started
 
@@ -74,6 +74,8 @@ We describe the three datasets we used in our paper. Specifically, we have
 
 All datasets could be downloaded from the link provided in the original paper.
 
-## License
+## Reference
+Dong, Z and Alterovitz, G (2019). netAE: Semi-supervised dimensionality reduction of single-cell RNA sequencing to facilitate cell labeling. *Submitted*.
 
+## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
