@@ -11,6 +11,7 @@ random.seed(0)
 
 import torch
 import numpy as np
+import os
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -121,41 +122,6 @@ def split_train_val_byclass(data, labels, train_ratio):
     return (train_data, train_labels, val_data, val_labels)
 
 
-def gen_batch_data(batch_i, nbatches, train_idx, train_data):
-    """ Generate the batch data of a given batch index.
-    The labeled set does not go through batching, so we do not need to
-    worry about separating into classes here.
-
-    Parameters
-    ----------
-    batch_i : int
-        Batch index.
-    nbatches : int
-        Number of batches.
-    train_idx : list
-        Shuffled train_idx at a certain epoch.
-    train_data : ndarray(nsamples, nfeatures)
-        Training data.
-
-    Returns
-    -------
-    batch_data : tensor (nsamples, nfeatures)
-        Data for this batch.
-    """
-    # print("in gen_batch_data...")
-    # obtain batch indices for the given batch index:
-    batch_size = int(float(len(train_idx)) / nbatches)
-
-    if batch_i < nbatches - 1:
-        batch_idx = torch.LongTensor(train_idx[(batch_i*batch_size) : ((batch_i+1)*batch_size)])
-    else:  # if processing the last batch
-        batch_idx = torch.LongTensor(train_idx[(batch_i*batch_size):])
-
-    # obtain data and labels of this mini-batch
-    batch_data = train_data[batch_idx, :]
-    return batch_data
-
-
 def partition_labeled_data(data, labels):
     """ Partition the labeled dataset with more than 2 labels into groups of binary sets.
     e.g. Dataset with labels (0, 1, 2, 3) is partitioned into (0, (1, 2, 3) as 1), (1 as 0, (2, 3) as 1), (2 as 0, 3 as 1)
@@ -171,10 +137,6 @@ def partition_labeled_data(data, labels):
     partitions : list of lists [partition1, partition2, partition3, ...]
         partition1 = [data of partition1, labels of partition1]
     """
-    # print("in partition_labeled_data...")
-    # convert labels from tensor to list for easy processing
-    # labels = torch.reshape(labels, (1, -1)).cpu().numpy().tolist()[0]
-
     partitions = []  # initialize
 
     idx_byclass = gen_idx_byclass(labels)
@@ -215,6 +177,8 @@ def log_metrics(metrics_dict, epoch, prnt=False):
     """
     # clear log files in the beginning
     if epoch == 0:
+        if not os.path.exists("logs"):
+            os.makedirs("logs")
         for name in list(metrics_dict.keys()):
             open("logs/{}.txt".format(name), "w+").close()
 

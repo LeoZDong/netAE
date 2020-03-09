@@ -39,7 +39,7 @@ class Data():
 		self.prep_method = prep_method
 
 	def load_all(self):
-		print("loading data...".format(self.seed))
+		print("loading all data...")
 
 		expr = self.dataset[:, 3:].astype(float)
 		lab_full = self.dataset[:, 1].astype(int)
@@ -58,7 +58,40 @@ class Data():
 		# combine information not necessary to training into a separate tuple
 		# It is never used in experiments in our paper, but can be useful in
 		# some cases.
-		info = (cell_type, cell_id, self.gene_names)
+		info = {}
+		info["cell_type"] = cell_type
+		info["cell_id"] = cell_id
+		info["gene_names"] = self.gene_names
+
+		print("expression set dimensions:", expr.shape)
+		return expr, lab_full, labeled_idx, unlabeled_idx, info
+
+	def load_subset(self, percent):
+		print("loading data subset...")
+
+		sample_idx = list(range(self.dataset.shape[0]))
+		random.Random(self.seed).shuffle(sample_idx)
+		sample_idx = sample_idx[:int(percent * len(sample_idx))]
+
+		expr = self.dataset[sample_idx, 3:].astype(int)
+		lab_full = self.dataset[sample_idx, 1].astype(int)
+		cell_id = self.dataset[sample_idx, 0]
+
+		# create dictionary mapping labels to cell_type
+		cell_type = dict(zip(lab_full, self.dataset[sample_idx, 2]))
+
+		# preprocess expression data
+		if self.prep_method is not None:
+			expr = self.preprocess(expr, self.prep_method)
+
+		# manually hide labels
+		labeled_idx, unlabeled_idx = self.hide_labs(lab_full)
+
+		# combine information not necessary to training the model into a separate tuple
+		info = {}
+		info["cell_type"] = cell_type
+		info["cell_id"] = cell_id
+		info["gene_names"] = self.gene_names
 
 		print("expression set dimensions:", expr.shape)
 		return expr, lab_full, labeled_idx, unlabeled_idx, info
