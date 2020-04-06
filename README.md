@@ -5,7 +5,7 @@ Network-enhanced autoencoder (netAE) is a semi-supervised dimensionality reducti
 
 ## Getting Started
 
-Clone the repository to your local directory. This includes the dataset we use for running the tests.
+Clone the repository to your local directory.
 
 ### Prerequisites
 
