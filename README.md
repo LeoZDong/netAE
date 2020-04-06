@@ -16,7 +16,7 @@ Clone the repository to your local directory. This includes the dataset we use f
 
 ## Data loading
 
-The `data.py` script handles data loading and preprocessing. For example, `dataset = Data(data_path, labeled_size=10, prep_method="log")` loads the the dataset from `data_path`, randomly assigns 10 samples per class to be labeled, and preprocesses by taking the log of the raw values. Within the data folder specified by `data_path`, the numpy array `dataset_matched.npy` contains the data matrix and `gene_names.npy` contains the names of the genes (not used in training, just for reference if needed). Download the data folder to view the format of the data.
+The `data.py` script handles data loading and preprocessing. For example, `dataset = Data(data_path, labeled_size=10, prep_method="log")` loads the the dataset from `data_path`, randomly assigns 10 samples per class to be labeled, and preprocesses by taking the log of the raw values. Within the data folder specified by `data_path`, the numpy array `dataset_matched.npy` contains the data matrix and `gene_names.npy` contains the names of the genes (not used in training, just for reference if needed). Note that the data matrix has shape (nsamples, ngenes), so the samples are rows and the genes are columns.
 
 To use the data for training, `dataset.load_all()` returns the following:
 - `expr`: preprocessed expression matrix as a numpy array
