@@ -75,7 +75,7 @@ We describe the three datasets we used in our paper. Specifically, we have
 All datasets could be downloaded from the link provided in the original paper.
 
 ## Reference
-Dong, Z and Alterovitz, G (2019). netAE: Semi-supervised dimensionality reduction of single-cell RNA sequencing to facilitate cell labeling. *Submitted*.
+[Dong, Z and Alterovitz, G (2020). netAE: Semi-supervised dimensionality reduction of single-cell RNA sequencing to facilitate cell labeling. *Bioinformatics*.](https://doi.org/10.1093/bioinformatics/btaa669)
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
