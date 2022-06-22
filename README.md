@@ -1,7 +1,15 @@
 
 # netAE: network-enhanced autoencoder
 
-Network-enhanced autoencoder (netAE) is a semi-supervised dimensionality reduction method. It was specifically designed to facilitate cell labeling of single cell RNA-sequencing data. This repository was created by Zhengyang (Leo) Dong.
+Network-enhanced autoencoder (netAE) is a semi-supervised dimensionality reduction method. It was specifically designed to facilitate cell labeling of single cell RNA-sequencing data.
+
+## Important Note
+This code base is a bit old at this time, so some implementation flaws do not necessarily reflect methodology flaws. Initially it was created to run experiments on medium-sized datasets mentioned in the paper's experiments section. I have seen complaints that the code wouldn't work on super large datasets because it is requesting an unreasonably large amount of memory. This is most likely because my implementation of the modularity calculation is matrix-based for parallelization, but it is much less data-efficient. In cases where you have a large set of labeled data that needs to go through the modularity calculation, consider changing to an iteration-based implementation. Alternatively, you can also try changing the "weighted modularity" to "sparsely weighted modularity" by discarding connections that are too weak.
+
+As with many neural networks, always fine-tune to your particular datasets before settling on model performance. On the three datasets that I ran my experiment on, I was able to get good results without much fine-tuning at all. But that does not mean the model could work on any dataset without fine-tuning. 
+
+If you have questions on any of the above-mentioned issues, or questions in general, feel free to reach out!
+
 
 ## Getting Started
 
